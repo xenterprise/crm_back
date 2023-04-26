@@ -8,6 +8,8 @@ firebase.initializeApp({
 const express = require("express");
 const cors = require("cors");
 const app = express();
+app.use(express.json());
+
 
 function addNewData(store, data) {
   // Fetch the user's email.
@@ -30,22 +32,47 @@ function addNewLinkages(store, baseKey, childKey) {
 //   console.log("Server Started");
 // });
 
-var companyKey = addNewData("company", {
-  name: "Bel Energy",
-  license: "4587545",
-});
-var userKey = addNewData("user", {
-  name: "tahir",
-  email: "mobeenyounis@gmail.com",
-});
-var projectKey = addNewData("project", {
-  trackingCode: "546",
-  serviceType: "NTN",
-});
+// var companyKey = addNewData("company", {
+//   name: "Bel Energy",
+//   license: "4587545",
+// });
+// var userKey = addNewData("user", {
+//   name: "tahir",
+//   email: "mobeenyounis@gmail.com",
+// });
+// var projectKey = addNewData("project", {
+//   trackingCode: "546",
+//   serviceType: "NTN",
+// });
 
-addNewLinkages("company_user", companyKey, userKey);
-addNewLinkages("company_project", companyKey, projectKey);
+// addNewLinkages("company_user", companyKey, userKey);
+// addNewLinkages("company_project", companyKey, projectKey);
+
+
 // app.get("/test", (req, res, next) => {
 //   console.log({ res: "Hello" });
 //   res.status(200).json({ res: "Hello" });
 // });
+
+app.post("/user", function(req, res) {
+  var userKey = addNewData("user", {
+    name: req.body.name,
+    email: req.body.email,
+    phone: req.body.phone,
+    careof: req.body.careOf,
+    source: req.body.source,
+    cnic: req.body.cnic,
+    city: req.body.city,
+    contactDate: req.body.contactDate,
+    notes: req.body.notes,
+    dob: req.body.dob,
+    isEmp: false,
+    level:1
+
+  });
+  res.status(200).send("User Added")
+});
+
+app.listen(3000, function(){
+  console.log("server is running on port 3000");
+})
