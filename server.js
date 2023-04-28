@@ -9,7 +9,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(express.json());
-
+app.use(cors());
 
 function addNewData(store, data) {
   // Fetch the user's email.
@@ -58,21 +58,26 @@ app.post("/user", function(req, res) {
   var userKey = addNewData("user", {
     name: req.body.name,
     email: req.body.email,
-    phone: req.body.phone,
-    careof: req.body.careOf,
-    source: req.body.source,
-    cnic: req.body.cnic,
-    city: req.body.city,
-    contactDate: req.body.contactDate,
-    notes: req.body.notes,
-    dob: req.body.dob,
-    isEmp: false,
-    level:1
+    // phone: req.body.phone,
+    // careof: req.body.careOf,
+    // source: req.body.source,
+    // cnic: req.body.cnic,
+    // city: req.body.city,
+    // contactDate: req.body.contactDate,
+    // notes: req.body.notes,
+    // dob: req.body.dob,
+    // isEmp: false,
+    // level:1
 
   });
   res.status(200).send("User Added")
 });
 
-app.listen(3000, function(){
-  console.log("server is running on port 3000");
+app.get("/test", function(req, res) {
+  res.status(200).send("Hello test call")
+});
+
+
+app.listen(8080, function(){
+  // console.log("server is running on port 3000");
 })
